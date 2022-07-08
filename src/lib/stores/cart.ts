@@ -27,9 +27,14 @@ const createCart = () => {
 	const removeFromCart = (id: number) => {
 		update((n) => {
 			if (n == null) return null;
+			const item = n.products.find((e) => e.product.id == id);
 			const items = n.products.map((e) => e.product.id);
 			const index = items.indexOf(id);
-			n.products.splice(index);
+			if (item && item?.qty <= 1) {
+				n.products.splice(index, 1);
+			} else if (item) {
+				n.products.splice(index, 1, { ...item, qty: item.qty - 1 });
+			}
 			return { ...n };
 		});
 	};

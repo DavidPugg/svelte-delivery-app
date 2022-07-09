@@ -8,7 +8,11 @@
 
 <div class="grid grid-cols-3 text-center py-4 bg-slate-400 text-white font-bold text-xl">
 	<h1 class="col-start-2">
-		{uppercaseTitle}
+		<a class="text-4xl" href="/">{uppercaseTitle}</a>
 	</h1>
-	<a href="/cart"><span class="">Cart({$cart ? $cart?.products.length : 0})</span></a>
+	<div class="flex gap-10 justify-center items-center">
+		<a href="/register">Register</a>
+		<a href="/login">login</a>
+		<a href="/cart"><span class="">Cart({$cart ? $cart?.products.length : 0})</span></a>
+	</div>
 </div>

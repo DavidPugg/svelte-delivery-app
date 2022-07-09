@@ -14,9 +14,9 @@
 	<div name="left" class="flex gap-10">
 		<p>${Math.floor(cartItem.product.price * cartItem.qty * 100) / 100}</p>
 		<div class="flex">
-			<p class="cursor-pointer" on:click={() => cart.removeFromCart(cartItem.product.id)}>-</p>
+			<p class="cursor-pointer select-none" on:click={() => cart.removeFromCart(cartItem.product.id)}>-</p>
 			<p class="w-12 text-center">{cartItem.qty}</p>
-			<p class="cursor-pointer" on:click={() => cart.addToCart(businessId, cartItem.product)}>+</p>
+			<p class="cursor-pointer select-none" on:click={() => cart.addToCart(businessId, cartItem.product)}>+</p>
 		</div>
 	</div>
 </div>

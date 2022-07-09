@@ -1,7 +1,8 @@
-import type { RequestEvent } from '@sveltejs/kit';
+import type { RequestEvent, RequestHandlerOutput } from '@sveltejs/kit';
 import { restaurants } from '$lib/database';
+import type { Business } from '$lib/types';
 
-export const get = async ({ params }: RequestEvent) => {
+export const get = async ({ params }: RequestEvent): Promise<RequestHandlerOutput<Business>> => {
 	await new Promise((resolve) =>
 		setTimeout(() => {
 			resolve(null);

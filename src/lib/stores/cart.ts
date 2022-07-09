@@ -35,6 +35,9 @@ const createCart = () => {
 			} else if (item) {
 				n.products.splice(index, 1, { ...item, qty: item.qty - 1 });
 			}
+			if (n.products.length <= 0) {
+				return null;
+			}
 			return { ...n };
 		});
 	};

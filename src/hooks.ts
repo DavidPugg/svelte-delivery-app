@@ -1,6 +1,8 @@
 import { db } from '$lib/database';
 import type { GetSession, Handle } from '@sveltejs/kit';
 import cookie from 'cookie';
+import cookieSign from 'cookie-signature';
+import 'dotenv/config';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const a = await event.request.body?.getReader().read();
@@ -12,12 +14,14 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const cookieHeader = event.request.headers.get('cookie');
 	const cookies = cookie.parse(cookieHeader ?? '');
 
-	if (!cookies.session) {
+	const uValue = cookieSign.unsign(cookies.session || '', process.env.SECRET ?? '');
+
+	if (!uValue) {
 		return await resolve(event);
 	}
 
 	const session = await db.user.findUnique({
-		where: { userAuthToken: cookies.session }
+		where: { userAuthToken: uValue }
 	});
 
 	if (session) {

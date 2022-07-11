@@ -2,6 +2,8 @@ import { db } from '$lib/database';
 import type { RequestHandler } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
 import cookie from 'cookie';
+import cookieSign from 'cookie-signature';
+import 'dotenv/config';
 
 export const post: RequestHandler = async ({ locals }) => {
 	const { email, password } = JSON.parse(locals.body || '');
@@ -40,13 +42,14 @@ export const post: RequestHandler = async ({ locals }) => {
 		};
 	}
 
+	const cookieValue = cookieSign.sign(user.userAuthToken, process.env.SECRET ?? '');
 	return {
 		status: 200,
 		body: {
 			user: { email }
 		},
 		headers: {
-			'Set-Cookie': cookie.serialize('session', user.userAuthToken, {
+			'Set-Cookie': cookie.serialize('session', cookieValue, {
 				path: '/',
 				httpOnly: true,
 				sameSite: 'strict',

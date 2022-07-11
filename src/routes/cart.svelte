@@ -1,3 +1,16 @@
+<script context="module" lang="ts">
+	import type { Load } from '@sveltejs/kit';
+	export const load: Load = ({ session }) => {
+		if (!session.user) {
+			return {
+				status: 302,
+				redirect: '/login'
+			};
+		}
+		return {};
+	};
+</script>
+
 <script lang="ts">
 	import Button from '$lib/components/atoms/Button.svelte';
 	import CartItem from '$lib/components/atoms/CartItem.svelte';

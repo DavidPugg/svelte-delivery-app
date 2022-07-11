@@ -1,15 +1,40 @@
+<script context="module" lang="ts">
+	import type { Load } from '@sveltejs/kit';
+	export const load: Load = ({ session }) => {
+		if (session.user) {
+			return {
+				status: 302,
+				redirect: '/'
+			};
+		}
+		return {};
+	};
+</script>
+
 <script lang="ts">
 	import Button from '$lib/components/atoms/Button.svelte';
 	import Container from '$lib/components/atoms/Container.svelte';
 	import Header from '$lib/components/atoms/Header.svelte';
 	import Input from '$lib/components/molecules/Input.svelte';
+	import { goto } from '$app/navigation';
 
 	let email = '';
 	let password = '';
 
-	const submitForm = () => {
+	const submitForm = async () => {
 		console.log(email);
 		console.log(password);
+
+		const res = await fetch('/api/auth/register', {
+			method: 'POST',
+			body: JSON.stringify({
+				email,
+				password
+			})
+		});
+		if (res.ok) {
+			goto('/login');
+		}
 	};
 </script>
 
@@ -23,6 +48,8 @@
 		<Input label="Email" bind:value={email} type="email" />
 		<Input label="Password" bind:value={password} type="password" />
 		<Button label="Register" type="submit" disabled={email == '' || password == ''} />
-        <p class="mx-auto">Already have an account? <a class="text-blue-500 underline" href="/login">Log in</a></p>
+		<p class="mx-auto">
+			Already have an account? <a class="text-blue-500 underline" href="/login">Log in</a>
+		</p>
 	</form>
 </Container>

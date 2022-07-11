@@ -1,9 +1,15 @@
 <script lang="ts">
 	import { cart } from '$lib/stores/cart';
+	import { session } from '$app/stores';
 
 	export let title: string;
 
 	$: uppercaseTitle = title.charAt(0).toUpperCase() + title.slice(1);
+
+	const logout = async () => {
+		await fetch('/api/auth/logout');
+		$session.user = undefined;
+	};
 </script>
 
 <div class="grid grid-cols-3 text-center py-4 bg-slate-400 text-white font-bold text-xl">
@@ -11,8 +17,12 @@
 		<a class="text-4xl" href="/">{uppercaseTitle}</a>
 	</h1>
 	<div class="flex gap-10 justify-center items-center">
-		<a href="/register">Register</a>
-		<a href="/login">login</a>
-		<a href="/cart"><span class="">Cart({$cart ? $cart?.products.length : 0})</span></a>
+		{#if !$session.user}
+			<a href="/register">Register</a>
+			<a href="/login">login</a>
+		{:else}
+			<p class="cursor-pointer" on:click={logout}>logout</p>
+			<a href="/cart"><span class="">Cart({$cart ? $cart?.products.length : 0})</span></a>
+		{/if}
 	</div>
 </div>

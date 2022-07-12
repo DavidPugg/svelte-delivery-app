@@ -1,5 +1,5 @@
 import type { RequestEvent, RequestHandlerOutput } from '@sveltejs/kit';
-import { restaurants } from '$lib/database';
+import { db } from '$lib/database';
 import type { Business } from '$lib/types';
 
 export const get = async ({ params }: RequestEvent): Promise<RequestHandlerOutput<Business>> => {
@@ -9,9 +9,16 @@ export const get = async ({ params }: RequestEvent): Promise<RequestHandlerOutpu
 		}, 50)
 	);
 	const { id } = params;
-	const restaurant = restaurants.find((restaurant) => restaurant.id == +id);
+	const restaurant = await db.restaurant.findUnique({
+		where: {
+			id: +id
+		},
+		include: {
+			products: true
+		}
+	});
 	return {
 		status: 200,
-		body: restaurant
+		body: restaurant!
 	};
 };

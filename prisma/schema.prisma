@@ -18,3 +18,17 @@ model User {
   passwordHash  String
   userAuthToken String   @unique @default(cuid())
 }
+
+model Restaurant {
+  id       Int       @id @default(autoincrement())
+  name     String
+  products Product[]
+}
+
+model Product {
+  id           Int        @id @default(autoincrement())
+  name         String
+  price        Float
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId Int
+}

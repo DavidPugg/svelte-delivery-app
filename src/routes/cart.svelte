@@ -38,7 +38,6 @@
 	};
 </script>
 
-<Header title="cart" />
 <Container>
 	<div class="flex flex-col gap-3 my-5">
 		{#if $cart}

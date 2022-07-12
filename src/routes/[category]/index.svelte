@@ -23,7 +23,6 @@
 	export let items: Business[];
 </script>
 
-<Header title={$page.params['category']} />
 <Container>
 	<div class="flex flex-col gap-3 my-5">
 		{#each items as item}

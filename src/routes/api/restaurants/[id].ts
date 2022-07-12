@@ -9,9 +9,9 @@ export const get = async ({ params }: RequestEvent): Promise<RequestHandlerOutpu
 		}, 50)
 	);
 	const { id } = params;
-	const restaurant = await db.restaurant.findUnique({
+	const restaurant = await db.restaurant.findFirst({
 		where: {
-			id: +id
+			id: +id as number
 		},
 		include: {
 			products: true
@@ -19,6 +19,6 @@ export const get = async ({ params }: RequestEvent): Promise<RequestHandlerOutpu
 	});
 	return {
 		status: 200,
-		body: restaurant!
+		body: restaurant
 	};
 };

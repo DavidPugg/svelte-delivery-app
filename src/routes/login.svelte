@@ -37,7 +37,6 @@
 	};
 </script>
 
-<Header title="login" />
 <Container>
 	<form
 		on:submit|preventDefault={submitForm}

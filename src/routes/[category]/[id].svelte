@@ -32,8 +32,6 @@
 	};
 </script>
 
-<Header title={item.name} />
-
 <Container>
 	<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 my-5">
 		{#each item.products as product}

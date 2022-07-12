@@ -38,7 +38,6 @@
 	};
 </script>
 
-<Header title="register" />
 <Container>
 	<form
 		on:submit|preventDefault={submitForm}

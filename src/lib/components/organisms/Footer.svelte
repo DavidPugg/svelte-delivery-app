@@ -1,4 +1,4 @@
-<div class="text-center py-3  bg-slate-400 text-white">
+<div class="text-center py-3  bg-primary text-text">
 	<p>@2022 Delivery app</p>
 </div>
 

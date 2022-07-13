@@ -1,6 +1,15 @@
 <script lang="ts">
-	export let to: string;
+	import { goto } from '$app/navigation';
+
 	export let name: string;
+	export let to: string;
 </script>
 
-<a href={to} class="bg-slate-400 py-2 px-6 cursor-pointer">{name}</a>
+<div
+	on:click={() => goto(to)}
+	class="group w-40 h-40 rounded-full bg-slate-400 relative flex justify-center"
+>
+	<p class="absolute -bottom-5 text-text bg-primary p-2 rounded transition-all cursor-pointer group-hover:bg-secondary">
+		{name}
+	</p>
+</div>

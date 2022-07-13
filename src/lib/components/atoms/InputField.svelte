@@ -9,7 +9,7 @@
 </script>
 
 <input
-	class="border px-3 py-1 outline-none focus:border-slate-600 flex flex-grow"
+	class="border px-3 py-1 outline-none focus:border-primary flex flex-grow"
 	{value}
 	id={label}
 	on:input={handleInput}

@@ -10,12 +10,17 @@
 	export let product: Product;
 </script>
 
-<div class="bg-slate-300 rounded p-4 flex flex-col justify-center items-center gap-3">
-	<p>{product.name}</p>
-	<p
+<div class="rounde justify-center items-center gap-3 overflow-hidden rounded-lg">
+	<div class="p-4 flex flex-col text-center bg-slate-400 text-text font-bold">
+		<p>{product.name}</p>
+		<p>
+			${product.price}
+		</p>
+	</div>
+	<div
 		on:click={handleClick}
-		class="bg-cyan-100 py-1 px-3 rounded hover:bg-red-200 transition-all  cursor-pointer"
+		class="bg-secondary text-text text-center py-2 hover:bg-primary transition-all cursor-pointer"
 	>
-		{product.price}
-	</p>
+		Add
+	</div>
 </div>

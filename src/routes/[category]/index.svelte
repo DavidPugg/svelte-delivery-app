@@ -23,7 +23,7 @@
 </script>
 
 <Container>
-	<div class="flex flex-col gap-3 my-5">
+	<div class="flex flex-wrap justify-center gap-20 my-5">
 		{#each items as item}
 			<BusinessItem to={`/${$page.params['category']}/${item.name}`} name={item.name} />
 		{/each}

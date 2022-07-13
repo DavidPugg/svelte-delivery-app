@@ -2,4 +2,4 @@
 	export let label: string;
 </script>
 
-<label class="bg-slate-400 flex items-center px-3 text-white font-bold" for={label}>{label}</label>
+<label class="bg-primary flex items-center px-3 text-white font-bold" for={label}>{label}</label>

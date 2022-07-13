@@ -44,8 +44,8 @@
 				<CartItem cartItem={item} businessId={$cart.businessId} />
 			{/each}
 		{/if}
-		<div class="flex justify-end items-center gap-4">
-			<p class="text-end">Total price: {totalPrice()}</p>
+		<div class="flex justify-end gap-4">
+			<p class="text-end border border-primary flex items-center text-primary px-4 rounded-lg">Total price: {totalPrice()}</p>
 			<Button type="submit" label="Order" disabled={!$cart} on:click={createOrder} />
 		</div>
 	</div>

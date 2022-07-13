@@ -15,7 +15,6 @@
 	import Button from '$lib/components/atoms/Button.svelte';
 	import CartItem from '$lib/components/atoms/CartItem.svelte';
 	import Container from '$lib/components/atoms/Container.svelte';
-	import Header from '$lib/components/atoms/Header.svelte';
 	import { cart } from '$lib/stores/cart';
 
 	$: totalPrice = () => {

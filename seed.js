@@ -5,6 +5,7 @@ export const db = new prisma.PrismaClient();
 const restaurants = [
 	{
 		name: 'Picikato',
+		type: 'restaurant',
 		products: {
 			create: [
 				{
@@ -20,6 +21,7 @@ const restaurants = [
 	},
 	{
 		name: 'Limbo',
+		type: 'restaurant',
 		products: {
 			create: [
 				{
@@ -35,6 +37,7 @@ const restaurants = [
 	},
 	{
 		name: 'Fudi',
+		type: 'restaurant',
 		products: {
 			create: [
 				{
@@ -52,7 +55,7 @@ const restaurants = [
 
 const seed = async () => {
 	restaurants.forEach(async (restaurant) => {
-		await db.restaurant.create({
+		await db.business.create({
 			data: {
 				...restaurant
 			}

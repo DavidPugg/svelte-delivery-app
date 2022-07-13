@@ -1,7 +1,7 @@
 <script>
-	import Footer from '$lib/components/atoms/Footer.svelte';
+	import Footer from '$lib/components/organisms/Footer.svelte';
 
-	import Header from '$lib/components/atoms/Header.svelte';
+	import Header from '$lib/components/organisms/Header.svelte';
 
 	import '../app.css';
 </script>

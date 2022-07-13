@@ -4,7 +4,7 @@
 
 	export const load = async ({ fetch, params }: LoadEvent): Promise<LoadOutput> => {
 		const { category } = params;
-		const res = await fetch(`/api/${category}`);
+		const res = await fetch(`/api/business?category=${category}`);
 		const data = await res.json();
 		return {
 			props: {
@@ -17,7 +17,6 @@
 <script lang="ts">
 	import BusinessItem from '$lib/components/atoms/BusinessItem.svelte';
 	import Container from '$lib/components/atoms/Container.svelte';
-	import Header from '$lib/components/atoms/Header.svelte';
 	import { page } from '$app/stores';
 
 	export let items: Business[];
@@ -26,10 +25,7 @@
 <Container>
 	<div class="flex flex-col gap-3 my-5">
 		{#each items as item}
-			<BusinessItem
-				to={`/${$page.params['category']}/${item.id}`}
-				name={item.name}
-			/>
+			<BusinessItem to={`/${$page.params['category']}/${item.name}`} name={item.name} />
 		{/each}
 	</div>
 </Container>

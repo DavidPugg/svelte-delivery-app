@@ -14,7 +14,6 @@
 <script lang="ts">
 	import Button from '$lib/components/atoms/Button.svelte';
 	import Container from '$lib/components/atoms/Container.svelte';
-	import Header from '$lib/components/atoms/Header.svelte';
 	import Input from '$lib/components/molecules/Input.svelte';
 	import { goto } from '$app/navigation';
 

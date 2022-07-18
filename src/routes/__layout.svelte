@@ -4,13 +4,16 @@
 	import Footer from '$lib/components/organisms/Footer.svelte';
 
 	import Header from '$lib/components/organisms/Header.svelte';
-	import { cart } from '$lib/stores/cart';
+	import { setCart } from '$lib/utils/cart';
+	import { onMount } from 'svelte';
 
 	import '../app.css';
 
-	if ($session.cart) {
-		cart.setCart($session.cart);
-	}
+	onMount(() => {
+		if ($session.cart) {
+			setCart($session.cart);
+		}
+	});
 </script>
 
 <svelte:head>

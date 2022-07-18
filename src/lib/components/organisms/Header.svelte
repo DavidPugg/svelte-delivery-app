@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { cart } from '$lib/stores/cart';
 	import { session } from '$app/stores';
 
 	export let title: string;
@@ -25,7 +24,7 @@
 			<a href="/cart" class="relative"
 				>Cart<span
 					class="cart-amount absolute -bottom-3 -right-7 text-center bg-secondary leading-3 w-7 h-7 rounded-full flex justify-center items-center"
-					>{$cart ? $cart?.products.length : 0}</span
+					>{$session.cart ? $session.cart.products.length : 0}</span
 				></a
 			>
 		{/if}

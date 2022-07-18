@@ -16,20 +16,21 @@
 <script lang="ts">
 	import Container from '$lib/components/atoms/Container.svelte';
 	import type { Business, Product as ProductType } from '$lib/types';
-	import { cart } from '$lib/stores/cart';
+	import { addToCart, resetCart } from '$lib/utils/cart';
 	import Product from '$lib/components/atoms/Product.svelte';
 	import { onMount } from 'svelte';
+	import { session } from '$app/stores';
 
 	export let item: Business;
 
 	onMount(() => {
-		if (item.id != $cart?.businessId) {
-			cart.resetCart();
+		if ($session.cart && item.id != $session?.cart.businessId) {
+			resetCart();
 		}
 	});
 
-	const addToCart = (product: ProductType) => {
-		cart.addToCart(item.id, product);
+	const handleAddToCart = (product: ProductType) => {
+		addToCart(item.id, product);
 	};
 </script>
 
@@ -37,7 +38,7 @@
 	<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 my-5">
 		{#if item}
 			{#each item?.products as product}
-				<Product on:addToCart={() => addToCart(product)} {product} />
+				<Product on:addToCart={() => handleAddToCart(product)} {product} />
 			{/each}
 		{/if}
 	</div>

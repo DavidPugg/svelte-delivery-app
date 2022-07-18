@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { cart } from '$lib/stores/cart';
+	import { addToCart, removeFromCart } from '$lib/utils/cart';
 
 	import type { CartItem } from '$lib/types';
 
@@ -14,9 +14,19 @@
 	<div name="left" class="flex gap-10">
 		<p>${Math.floor(cartItem.product.price * cartItem.qty * 100) / 100}</p>
 		<div class="flex">
-			<p class="cursor-pointer select-none bg-text rounded-full px-3 text-black" on:click={() => cart.removeFromCart(cartItem.product.id)}>-</p>
+			<p
+				class="cursor-pointer select-none bg-text rounded-full px-3 text-black"
+				on:click={() => removeFromCart(cartItem.product.id)}
+			>
+				-
+			</p>
 			<p class="w-12 text-center">{cartItem.qty}</p>
-			<p class="cursor-pointer select-none bg-text rounded-full px-3 text-black" on:click={() => cart.addToCart(businessId, cartItem.product)}>+</p>
+			<p
+				class="cursor-pointer select-none bg-text rounded-full px-3 text-black"
+				on:click={() => addToCart(businessId, cartItem.product)}
+			>
+				+
+			</p>
 		</div>
 	</div>
 </div>

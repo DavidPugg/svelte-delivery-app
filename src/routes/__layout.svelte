@@ -1,9 +1,16 @@
 <script>
+	import { session } from '$app/stores';
+
 	import Footer from '$lib/components/organisms/Footer.svelte';
 
 	import Header from '$lib/components/organisms/Header.svelte';
+	import { cart } from '$lib/stores/cart';
 
 	import '../app.css';
+
+	if ($session.cart) {
+		cart.setCart($session.cart);
+	}
 </script>
 
 <svelte:head>

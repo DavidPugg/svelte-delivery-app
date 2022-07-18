@@ -16,6 +16,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	const uValue = cookieSign.unsign(cookies.session || '', process.env.SECRET ?? '');
 
+	const cart = cookies['cart'];
+
+	if (cart) {
+		event.locals.cart = JSON.parse(cart);
+	}
+
 	if (!uValue) {
 		return await resolve(event);
 	}
@@ -33,12 +39,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 export const getSession: GetSession = ({ locals }) => {
 	if (!locals.user) {
-		return {};
+		return {
+			cart: locals.cart
+		};
 	}
 
 	return {
 		user: {
 			email: locals.user.email
-		}
+		},
+		cart: locals.cart
 	};
 };

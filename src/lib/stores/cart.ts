@@ -1,27 +1,38 @@
 import type { Cart, Product } from '$lib/types';
+import { deleteCookie, setCookie } from '$lib/utils/cookie';
 import { writable } from 'svelte/store';
 
 const createCart = () => {
 	const { subscribe, set, update } = writable<Cart | null>(null);
 
 	const addToCart = (businessId: number, product: Product) => {
+		let cart: Cart;
 		update((n) => {
 			if (!n || n.businessId != businessId) {
-				return {
+				cart = {
 					businessId,
 					products: [{ product, qty: 1 }]
 				};
+				setCookie('cart', cart, 30);
+				return cart;
 			}
 			const products = getUpdatedProducts(n, product);
-			return {
+			cart = {
 				...n,
 				products
 			};
+			setCookie('cart', cart, 30);
+			return cart;
 		});
 	};
 
 	const resetCart = () => {
+		deleteCookie('cart');
 		set(null);
+	};
+
+	const setCart = (cart: Cart) => {
+		set(cart);
 	};
 
 	const removeFromCart = (id: number) => {
@@ -36,8 +47,10 @@ const createCart = () => {
 				n.products.splice(index, 1, { ...item, qty: item.qty - 1 });
 			}
 			if (n.products.length <= 0) {
+				deleteCookie('cart');
 				return null;
 			}
+			setCookie('cart', { ...n }, 30);
 			return { ...n };
 		});
 	};
@@ -57,7 +70,8 @@ const createCart = () => {
 		subscribe,
 		addToCart,
 		resetCart,
-		removeFromCart
+		removeFromCart,
+		setCart
 	};
 };
 

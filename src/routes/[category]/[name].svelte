@@ -18,13 +18,16 @@
 	import type { Business, Product as ProductType } from '$lib/types';
 	import { cart } from '$lib/stores/cart';
 	import Product from '$lib/components/atoms/Product.svelte';
-	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 
 	export let item: Business;
 
-	if (+$page.params['id'] != $cart?.businessId) {
-		cart.resetCart();
-	}
+	onMount(() => {
+		console.log($cart?.businessId)
+		// if (item.id != $cart?.businessId) {
+		// 	cart.resetCart();
+		// }
+	});
 
 	const addToCart = (product: ProductType) => {
 		cart.addToCart(item.id, product);

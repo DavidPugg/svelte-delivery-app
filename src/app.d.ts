@@ -6,12 +6,14 @@
 declare namespace App {
 	interface Locals {
 		body?: string;
+		cart?: Cart;
 		user?: {
 			email: string;
 		};
 	}
 
 	interface Session {
+		cart?: Cart;
 		user?: {
 			email: string;
 		};

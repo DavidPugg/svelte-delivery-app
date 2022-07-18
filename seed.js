@@ -53,11 +53,55 @@ const restaurants = [
 	}
 ];
 
+const stores = [
+	{
+		name: 'Mercator',
+		type: 'store',
+		products: {
+			create: [
+				{
+					name: 'Bread',
+					price: 1.29
+				},
+				{
+					name: 'Olive oil',
+					price: 9.99
+				}
+			]
+		}
+	},
+	{
+		name: 'Spar',
+		type: 'store',
+		products: {
+			create: [
+				{
+					name: 'Water',
+					price: 0.59
+				},
+				{
+					name: 'Flour',
+					price: 1.99
+				}
+			]
+		}
+	}
+];
+
 const seed = async () => {
+	await db.product.deleteMany({});
+	await db.business.deleteMany({});
 	restaurants.forEach(async (restaurant) => {
 		await db.business.create({
 			data: {
 				...restaurant
+			}
+		});
+	});
+	stores.forEach(async (store) => {
+		await db.business.create({
+			data: {
+				...store
 			}
 		});
 	});

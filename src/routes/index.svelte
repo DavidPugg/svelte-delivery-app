@@ -4,7 +4,8 @@
 </script>
 
 <Container>
-	<div class="flex flex-col items-center my-5 gap-4">
-		<CategoryLink to="/restaurant" categoryText="Restaurants" />
+	<div class="flex flex-wrap justify-center my-5 gap-10">
+		<CategoryLink to="/restaurant" categoryText="Restaurants" img="images/restaurants.jpg" />
+		<CategoryLink to="/store" categoryText="Stores" img="images/stores.jpg" />
 	</div>
 </Container>

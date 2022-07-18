@@ -38,16 +38,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 };
 
 export const getSession: GetSession = ({ locals }) => {
-	if (!locals.user) {
-		return {
-			cart: locals.cart
-		};
-	}
-
 	return {
-		user: {
-			email: locals.user.email
-		},
-		cart: locals.cart
+		user: locals.user
+			? {
+					email: locals.user.email
+			  }
+			: undefined,
+		cart: locals.cart ? locals.cart : undefined
 	};
 };

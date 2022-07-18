@@ -23,10 +23,9 @@
 	export let item: Business;
 
 	onMount(() => {
-		console.log($cart?.businessId)
-		// if (item.id != $cart?.businessId) {
-		// 	cart.resetCart();
-		// }
+		if (item.id != $cart?.businessId) {
+			cart.resetCart();
+		}
 	});
 
 	const addToCart = (product: ProductType) => {

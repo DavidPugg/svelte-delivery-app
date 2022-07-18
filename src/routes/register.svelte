@@ -21,9 +21,6 @@
 	let password = '';
 
 	const submitForm = async () => {
-		console.log(email);
-		console.log(password);
-
 		const res = await fetch('/api/auth/register', {
 			method: 'POST',
 			body: JSON.stringify({

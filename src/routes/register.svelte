@@ -19,6 +19,11 @@
 
 	let email = '';
 	let password = '';
+	let error = '';
+
+	$: if (email || password) {
+		error = '';
+	}
 
 	const submitForm = async () => {
 		const res = await fetch('/api/auth/register', {
@@ -28,9 +33,12 @@
 				password
 			})
 		});
-		if (res.ok) {
-			goto('/login');
+		if (!res.ok) {
+			const data = await res.json();
+			error = data.error;
+			return;
 		}
+		goto('/');
 	};
 </script>
 
@@ -42,6 +50,11 @@
 	>
 		<Input label="Email" bind:value={email} type="email" />
 		<Input label="Password" bind:value={password} type="password" />
+		<div class="flex items-center justify-center">
+			{#if error}
+				<p class="text-md text-red-500 border border-red-500 px-5 py-1 rounded-lg">{error}</p>
+			{/if}
+		</div>
 		<Button label="Register" type="submit" disabled={email == '' || password == ''} />
 		<p class="mx-auto">
 			Already have an account? <a class="text-blue-500 underline" href="/login">Log in</a>

@@ -5,6 +5,7 @@ import cookie from 'cookie';
 import cookieSign from 'cookie-signature';
 import 'dotenv/config';
 
+
 export const post: RequestHandler = async ({ locals }) => {
 	const { email, password } = JSON.parse(locals.body || '');
 
@@ -16,7 +17,7 @@ export const post: RequestHandler = async ({ locals }) => {
 			}
 		};
 	}
-
+	
 	if (!email || !password) {
 		return {
 			status: 400,

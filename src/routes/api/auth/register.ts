@@ -1,6 +1,9 @@
 import { db } from '$lib/database';
+import { minLength } from '$lib/utils/form';
 import type { RequestHandler } from '@sveltejs/kit';
 import bcrypt from 'bcrypt';
+
+const MIN_PASSWORD_LENGTH = 6;
 
 export const post: RequestHandler = async ({ locals }) => {
 	const { email, password } = JSON.parse(locals.body || '');
@@ -10,6 +13,15 @@ export const post: RequestHandler = async ({ locals }) => {
 			status: 400,
 			body: {
 				error: 'Enter a valid email and password!'
+			}
+		};
+	}
+
+	if (minLength(password, MIN_PASSWORD_LENGTH)) {
+		return {
+			status: 400,
+			body: {
+				error: `Password must be atleast ${MIN_PASSWORD_LENGTH} characters long!`
 			}
 		};
 	}
